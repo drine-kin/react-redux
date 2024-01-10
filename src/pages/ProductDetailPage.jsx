@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import Loading from '../components/Loading';
 import Rating from '../components/Rating';
 import Quantity from '../components/Quantity';
+import { useSelector } from 'react-redux';
 
 const ProductDetailPage = () => {
 
@@ -14,7 +15,11 @@ const ProductDetailPage = () => {
 
   const [currentImage, setCurrentImage] = useState("");
 
-  const [quantity, setQuantity] = useState(1);
+  const cart = useSelector((state) => state.cartItems);
+
+  const currentCartProduct = cart.find(item => item.product.id === parseInt(id));
+
+  const [quantity, setQuantity] = useState(currentCartProduct && currentCartProduct.quantity || 1);
 
   const fetchProduct = async (id) => {
 
