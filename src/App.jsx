@@ -8,21 +8,23 @@ import LoginPage from './pages/LoginPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import CartPage from './pages/CartPage';
 import PrivateRoute from './components/PrivateRoute';
+import NotFound from './pages/NotFound';
 
 const App = () => {
   return (
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />} >
-            <Route index element={<ProductListPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/product-detail/:id" element={<ProductDetailPage />} />
-            <Route path="/cart" element={<PrivateRoute>
-              <CartPage />
-            </PrivateRoute>} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />} >
+          <Route index element={<ProductListPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/product-detail/:id" element={<ProductDetailPage />} />
+          <Route path="/cart" element={<PrivateRoute>
+            <CartPage />
+          </PrivateRoute>} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 

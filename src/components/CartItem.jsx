@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Quantity from './Quantity';
+import { Link } from 'react-router-dom';
 
 const CartItem = ({ item, handleRemoveFromCart }) => {
 
@@ -21,7 +22,7 @@ const CartItem = ({ item, handleRemoveFromCart }) => {
             </td>
             <td className="col-span-4 font-bold pl-2 text-textColor md:self-center lg:font-medium lg:col-span-1 lg:pl-0">
                 <h3 className=''>
-                    <a href={`product-detail/${product.id}`}>{product.title}</a>
+                    <Link to={`/product-detail/${product.id}`}>{product.title}</Link>
                 </h3>
             </td>
             <td className="self-center col-span-4 pl-2 text-textColor lg:col-span-1 lg:pl-0">
