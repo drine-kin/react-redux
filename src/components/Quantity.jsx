@@ -17,7 +17,7 @@ const Quantity = ({ product, quantity, setQuantity, inCart = false }) => {
     };
 
     const handleAddtoCart = () => {
-        quantity && dispatch(addToCart({ product, quantity }));
+        quantity >= 1 && dispatch(addToCart({ product, quantity }));
     }
 
     return (
