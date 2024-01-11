@@ -56,44 +56,38 @@ export const mainSlice = createSlice({
 
     //   localStorage.setItem('cartItems', JSON.stringify(state.cartItems));
     // },
-    
+
     addToCart: (state, action) => {
       const { product, quantity } = action.payload;
-    
-      // Find the index of the existing item in the cart based on its product ID
+
       const existingItemIndex = state.cartItems.findIndex(item => item.product.id === product.id);
-    
-      // Create a copy of the current cart items array
+
       const updatedCartItems = [...state.cartItems];
-    
-      // Check if the product is already in the cart
+
       if (existingItemIndex !== -1) {
-        // If the product is in the cart and has enough stock, update the quantity
-        if (product.stock >= quantity) {
-          updatedCartItems[existingItemIndex].quantity = quantity;
+
+        const newQuantity = quantity || (updatedCartItems[existingItemIndex].quantity + 1);
+        if (product.stock >= newQuantity) {
+          updatedCartItems[existingItemIndex].quantity = newQuantity;
         }
+
       } else {
-        // If the product is not in the cart, add it
-        // Check if the product has enough stock (default to 1 if quantity is not provided)
         if (product.stock >= (quantity || 1)) {
           updatedCartItems.push({
             product,
-            // Calculate the discounted price if a discount percentage is present
             price: product.discountPercentage
               ? (product.price - (product.price * (product.discountPercentage / 100))).toFixed(2)
               : product.price,
-            quantity: parseInt(quantity || 1)  // Parse quantity to ensure it's an integer
+            quantity: parseInt(quantity || 1) 
           });
         }
       }
-    
-      // Update the state with the modified cart items
+
       state.cartItems = updatedCartItems;
-    
-      // Update the localStorage with the updated cart items
+      
       localStorage.setItem('cartItems', JSON.stringify(state.cartItems));
     },
-    
+
     removeFromCart: (state, action) => {
       const id = action.payload;
 

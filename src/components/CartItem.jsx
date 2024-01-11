@@ -8,7 +8,7 @@ const CartItem = ({ item, handleRemoveFromCart }) => {
 
     const [quantity, setQuantity] = useState(cartQty);
 
-    const saledPrice = product.price - (product.price * (product.discountPercentage / 100)).toFixed(2);
+    const saledPrice = (product.price - (product.price * (product.discountPercentage / 100))).toFixed(2);
 
     return (
 
